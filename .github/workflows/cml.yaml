@@ -1,0 +1,15 @@
+name: mlops-automatic_testing
+on: [push]
+jobs:
+  run:
+    runs-on: [ubuntu-latest]
+    container: docker://dvcorg/cml-py3:latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: 'Train my model'
+        env:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Your ML workflow goes here
+          pip install -r requirements.txt
+          python test.py
